@@ -25,6 +25,7 @@
   border: solid;
   border-width: 5px 0px;
   border-color: green;
+  overflow: auto;
 }
 
 .app__footer {
