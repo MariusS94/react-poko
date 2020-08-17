@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import Pokemons from "./pages/pokemons";
+import Pokemons from "./pages/Pokemons";
+import Pokemon from "./pages/Pokemon";
 
 import {
   BrowserRouter as Router,
@@ -16,6 +17,9 @@ function App() {
     <Router>
       <div className="app">
         <Switch>
+          <Route path="/pokemons/:name">
+            <Pokemon />
+          </Route>
           <Route path="/pokemons">
             <Pokemons></Pokemons>
           </Route>

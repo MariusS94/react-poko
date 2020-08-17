@@ -9,7 +9,6 @@ export async function fetchPokes() {
     name: pokemon.name,
     id: pokemon.national_number,
     imgSrc: pokemon.sprites.normal,
-    link: `#${pokemon.name.tolowercase}`,
   }));
 
   const uniquePokemons = pokemons.filter(
@@ -17,4 +16,25 @@ export async function fetchPokes() {
       pokemons.findIndex((other) => other.id === pokemon.id) === index
   );
   return uniquePokemons;
+}
+
+export async function fetchPokemon(pokemonName) {
+  const respond = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+  );
+
+  if (!respond.ok) {
+    throw new Error(respond);
+  }
+  const result = await respond.json();
+  const pokemon = {
+    name: result.name,
+    id: result.id,
+    /* imgSrc: result.sprites.front_deafault, */
+    imgSrc: `https://img.pokemondb.net/sprites/black-white/anim/normal/${result.name}.gif`,
+    hp: result.stats[0]?.base_stat,
+    attack: result.stats[1]?.base_stat,
+    defense: result.stats[2]?.base_stat,
+  };
+  return pokemon;
 }
