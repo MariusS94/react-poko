@@ -3,7 +3,7 @@ import "../App.css";
 import List from "../components/List";
 import ListItem from "../components/ListItem";
 import ListItemIcon from "../components/ListItemIcon";
-import { loading } from "../assets/loading.svg";
+import loading from "../assets/loading.svg";
 
 import ListItemText from "../components/ListItemText";
 import { fetchPokes } from "../api/Pokemon";
@@ -29,6 +29,7 @@ function Pokemons() {
   if (!isLoaded) {
     return <img src={loading} alt="loading spinner" />;
   }
+
   return (
     <>
       <header className="app__header">
