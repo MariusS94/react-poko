@@ -18,3 +18,20 @@ export async function fetchPokes() {
   );
   return uniquePokemons;
 }
+
+export async function fetchPokemon(pokemonName) {
+  const respond = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+  );
+
+  if (!respond.ok) {
+    throw new Error(respond);
+  }
+  const result = await respond.json();
+  const pokemon = {
+    name: result.name,
+    id: result.id,
+    imgSrc: result.sprites.front_deafault,
+  };
+  return pokemon;
+}

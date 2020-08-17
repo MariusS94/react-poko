@@ -3,10 +3,10 @@ import "../App.css";
 import List from "../components/List";
 import ListItem from "../components/ListItem";
 import ListItemIcon from "../components/ListItemIcon";
-import loading from "../assets/loading.svg";
 
 import ListItemText from "../components/ListItemText";
-import { fetchPokes } from "../api/Pokemon";
+import { fetchPokes } from "../api/pokemon";
+import LoadingScreen from "../components/LoadingScreen";
 
 function waitFor(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -27,7 +27,7 @@ function Pokemons() {
   }, []);
 
   if (!isLoaded) {
-    return <img src={loading} alt="loading spinner" />;
+    return <LoadingScreen />;
   }
 
   return (
