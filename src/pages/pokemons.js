@@ -39,7 +39,10 @@ function Pokemons() {
       <main className="app__main">
         <List>
           {pokemons?.map((pokemon) => (
-            <ListItem key={pokemon.id} href={pokemon.link}>
+            <ListItem
+              key={pokemon.id}
+              href={`/pokemons/${pokemon.name.toLowerCase()}`}
+            >
               <ListItemIcon image={pokemon.imgSrc} />
               <ListItemText
                 primary={pokemon.name}
