@@ -5,40 +5,46 @@ import ListItem from "../components/ListItem";
 import ListItemIcon from "../components/ListItemIcon";
 
 import ListItemText from "../components/ListItemText";
-import { fetchPokes } from "../api/pokemon";
+import { fetchPokes } from "../api/Pokemon";
 import LoadingScreen from "../components/LoadingScreen";
-
-function waitFor(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
+import SearchInput from "../components/SearchInput";
 
 function Pokemons() {
   const [pokemons, setPokemons] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      await waitFor(2000);
+      setIsLoading(true);
       const allPokemons = await fetchPokes();
-      setIsLoaded(true);
       setPokemons(allPokemons);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
 
-  if (!isLoaded) {
+  if (isLoading || pokemons === null) {
     return <LoadingScreen />;
   }
+  const filteredPokemons = pokemons.filter((pokemon) => {
+    return pokemon.name.toLowerCase().startsWith(query.toLowerCase());
+  });
 
   return (
     <>
       <header className="app__header">
         Pokedexs
-        <input placeholder="Search" className="header__input" />
+        <SearchInput
+          value={query}
+          onChange={(value) => setQuery(value)}
+          placeholder="Enter name"
+          className="header__input"
+        />
       </header>
       <main className="app__main">
         <List>
-          {pokemons?.map((pokemon) => (
+          {filteredPokemons?.map((pokemon) => (
             <ListItem
               key={pokemon.id}
               href={`/pokemons/${pokemon.name.toLowerCase()}`}

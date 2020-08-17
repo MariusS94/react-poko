@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { fetchPokemon } from "../api/pokemon";
+import { fetchPokemon } from "../api/Pokemon";
 import LoadingScreen from "../components/LoadingScreen";
 import "./Pokemon.css";
 function Pokemon() {
