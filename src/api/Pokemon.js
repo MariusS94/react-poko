@@ -7,9 +7,14 @@ export async function fetchPokes() {
 
   const pokemons = result.results.map((pokemon) => ({
     name: pokemon.name,
-    id: pokemon.nationalnumber,
+    id: pokemon.national_number,
     imgSrc: pokemon.sprites.normal,
     link: `#${pokemon.name.tolowercase}`,
   }));
-  return pokemons;
+
+  const uniquePokemons = pokemons.filter(
+    (pokemon, index) =>
+      pokemons.findIndex((other) => other.id === pokemon.id) === index
+  );
+  return uniquePokemons;
 }
